@@ -1,0 +1,11 @@
+# Environment and Cache
+venv/
+__pycache__/
+
+# Data and Logs (DO NOT COMMIT)
+data/
+uploads/
+query_logs.txt
+
+# Operating System Files
+.DS_Store
