@@ -1,99 +1,124 @@
-import json
-from pathlib import Path
-from typing import Dict, Any
+# --- rag_service.py (Integrated with Parquet Data) ---
 
-PROCESSED_JSON_PATH = Path("data/processed_docs.json")
+import pandas as pd
+import os
+from typing import List, Dict, Any
 
-def load_documents_from_processed():
-    docs = []
-    if PROCESSED_JSON_PATH.exists():
-        with open(PROCESSED_JSON_PATH, "r", encoding="utf-8") as f:
-            all_docs = json.load(f)
-        # all_docs is a list of {id, chunks, source}
-        for d in all_docs:
-            for chunk in d.get("chunks", []):
-                docs.append({
-                    "id": chunk["id"],
-                    "text": chunk["text"],
-                    "source": chunk.get("source", d.get("source", "N/A"))
-                })
-    else:
-        # fallback minimal doc if nothing processed yet
-        docs = [
-            {
-                "id": "doc1",
-                "text": "Malaysia is pushing digitalisation (digitalisasi) under the MyDIGITAL blueprint. Many organisations face issues (isu) managing SOP information (maklumat SOP).",
-                "source": "/mnt/data/Embedded LLM Track.pdf"
-            }
-        ]
-    return docs
+# --- CONFIGURATION (Must match your file names) ---
+ENGLISH_FILE = 'english_prompt (4).parquet'
+MALAY_FILE = 'malay_prompt (1).parquet'
 
-# Use this function whenever you need current documents:
-# Note: In a real system, this would not be a global variable but loaded on startup/demand.
+# These columns are derived from your prompt engineer's file structure (from extract_prompts.py)
+# We map the user's query to a key in the RAG data, and the answer to the text content.
+ENGLISH_QUERY_COL = 'input_fromuser'
+ENGLISH_ANSWER_COL = 'answer_queries' # Using this column for the RAG context/answer
+
+MALAY_QUERY_COL = 'Input_penerima'
+MALAY_ANSWER_COL = 'pengesahan_khabarangin' # Using this column for the RAG context/answer
+# --------------------------------------------------
+
+DOCUMENTS: List[Dict[str, Any]] = []
+
+
+def load_documents_from_processed() -> List[Dict[str, Any]]:
+    """
+    Loads data from the English and Malay Parquet files and formats it for RAG.
+    """
+    global DOCUMENTS
+    
+    loaded_docs = []
+    
+    # 1. Load English Data
+    if os.path.exists(ENGLISH_FILE):
+        try:
+            df_en = pd.read_parquet(ENGLISH_FILE, engine='pyarrow')
+            
+            # Combine the relevant columns into a list of dictionaries
+            english_docs = [
+                {
+                    "query": row[ENGLISH_QUERY_COL].strip().lower(), # Store query for lookup
+                    "text": row[ENGLISH_ANSWER_COL].strip(),       # Store answer as RAG context
+                    "source": f"Source: {ENGLISH_FILE}", 
+                    "language": "en"
+                }
+                # Filter out rows where the answer or query column is empty/missing
+                for _, row in df_en.dropna(subset=[ENGLISH_QUERY_COL, ENGLISH_ANSWER_COL]).iterrows()
+            ]
+            loaded_docs.extend(english_docs)
+            print(f"--- [RAG Service]: Loaded {len(english_docs)} English records from {ENGLISH_FILE}. ---")
+        except Exception as e:
+            print(f"--- [RAG Service ERROR]: Failed to load English Parquet: {e} ---")
+
+    # 2. Load Malay Data
+    if os.path.exists(MALAY_FILE):
+        try:
+            df_ms = pd.read_parquet(MALAY_FILE, engine='pyarrow')
+            
+            # Combine the relevant columns into a list of dictionaries
+            malay_docs = [
+                {
+                    "query": row[MALAY_QUERY_COL].strip().lower(), # Store query for lookup
+                    "text": row[MALAY_ANSWER_COL].strip(),       # Store answer as RAG context
+                    "source": f"Source: {MALAY_FILE}", 
+                    "language": "ms"
+                }
+                # Filter out rows where the answer or query column is empty/missing
+                for _, row in df_ms.dropna(subset=[MALAY_QUERY_COL, MALAY_ANSWER_COL]).iterrows()
+            ]
+            loaded_docs.extend(malay_docs)
+            print(f"--- [RAG Service]: Loaded {len(malay_docs)} Malay records from {MALAY_FILE}. ---")
+        except Exception as e:
+            print(f"--- [RAG Service ERROR]: Failed to load Malay Parquet: {e} ---")
+            
+    DOCUMENTS = loaded_docs
+    return DOCUMENTS
+
+# Initialize DOCUMENTS globally when the module loads
 DOCUMENTS = load_documents_from_processed()
 
-def search_documents(query: str) -> Dict[str, Any]:
-    query_words = query.lower().split()
-    docs = load_documents_from_processed()  # reload latest processed docs
+
+def search_documents(query: str, language: str) -> Dict[str, Any]:
+    """
+    Simulates RAG retrieval by performing an exact match search against the
+    user input column loaded from the parquet files.
+    """
     
-    # Filter out short, common words that don't help the keyword search
-    meaningful_query_words = [w for w in query_words if len(w) > 2 and w not in ["the", "and", "but", "what", "how", "does", "about", "for", "dalam", "yang", "ini", "itu"]]
-
-    for doc in docs:
-        doc_text = doc["text"].lower()
-        match_count = sum(1 for w in meaningful_query_words if w in doc_text)
-        
-        # Calculate a simulated "Relevance Score" (better than simple count)
-        query_word_count = len(meaningful_query_words)
-        # Score is the fraction of query words found, capped at 1.0
-        relevance_score = min(1.0, match_count / max(1, query_word_count)) 
-
-        # Only consider relevant if the score is above a threshold (Simulated Vector Search threshold)
-        if relevance_score >= 0.5:
+    query_lower = query.strip().lower()
+    
+    # Simple retrieval: Find the first document where the loaded query matches the user's input
+    for doc in DOCUMENTS:
+        if doc["query"] == query_lower:
+            print(f"--- [RAG Service]: Exact match found for query: {query} ---")
             return {
-                "id": doc["id"],
-                "text": doc["text"],
+                "retrieved_context": doc["text"],
                 "source": doc["source"],
-                "relevance_score": relevance_score # Added simulated score for context
+                "query": query,
+                "language": language
             }
-
+        
+    # Fallback: No relevant context found
     return {
-        "id": "N/A",
-        "text": "No relevant SOP found. Please try a different query.",
-        "source": "N/A"
+        "retrieved_context": "No relevant context found in documents.",
+        "source": "N/A",
+        "query": query,
+        "language": language
     }
 
-def generate_answer(query: str, retrieved_result: Dict[str, Any], language: str) -> str:
-    """
-    Simulates the LLM generation step using the retrieved text and the query.
-    (Step 1: Generation)
-    """
-    lang_code = language.upper()
-    retrieved_text = retrieved_result["text"]
-    retrieved_source = retrieved_result["source"]
 
-    # Handle case where no relevant document was found
-    if retrieved_text == "No relevant SOP found.":
-         # Use the query language for the failure message
-         if language == "ms":
-              return f"[{lang_code}] **PENJANAAN LLM (Simulasi)**: Tiada maklumat SOP yang relevan ditemui untuk menjawab pertanyaan anda: '{query}'. Sila cuba pertanyaan lain."
-         else: # Default to English
-              return f"[{lang_code}] **LLM GENERATION (Simulated)**: No relevant SOP information was found to answer your query: '{query}'. Please try a different query."
+def get_simulated_llm_response(search_result: Dict[str, Any], prompt_templates: Dict[str, Any]) -> str:
+    """
+    Since the parquet data contains the 'golden answer,' we just return the retrieved text.
+    """
+    context = search_result['retrieved_context']
+    source = search_result['source']
+    lang = search_result['language']
+    
+    if "No relevant context found" not in context:
+        # Return the 'golden answer' directly, appending the source
+        return f"{context} (Source: {source})"
+        
+    # Condition 3: Fallback (No Context)
+    if lang == "ms":
+        return "Saya tidak dapat mencari maklumat yang berkaitan dengan soalan anda dalam dokumen yang disediakan. (Sumber: N/A)"
     else:
-         # Simulate a successful LLM generation based on retrieved context
-         text_preview = retrieved_text[:150].replace('\n', ' ')
-         
-         if language == "ms":
-              return (
-                 f"[{lang_code}] **PENJANAAN LLM (Simulasi)**: "
-                 f"Saya telah mendapatkan teks SOP berikut (Sumber: {retrieved_source}): '{text_preview}...'. "
-                 f"LLM kini akan menggunakan teks ini untuk menjana jawapan kepada pertanyaan: '{query}'. "
-                 f"Jawapan akhir akan dijana dalam bahasa {language.upper()}."
-             )
-         else: # Default to English
-              return (
-                 f"[{lang_code}] **LLM GENERATION (Simulated)**: "
-                 f"I have retrieved the following SOP text (Source: {retrieved_source}): '{text_preview}...'. "
-                 f"The LLM would now use this text to answer the query: '{query}'. "
-                 f"The final answer would be generated in {language.upper()}."
-             )
+        return "I could not find relevant information for your query in the provided documents. (Source: N/A)"

@@ -6,3 +6,4 @@ __pycache__/
 data/
 uploads/
 query_logs.txt
+pps_live_status.json
