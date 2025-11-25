@@ -1,11 +1,13 @@
 import pandas as pd
 import os
 
-# --- Configuration (Must match your file names and columns) ---
-ENGLISH_FILE = 'english_prompt (4).parquet'
-MALAY_FILE = 'malay_prompt (1).parquet'
+# get_test_queries.py: Configuration Block (Lines 4-8)
 
-# These column names are based on your rag_service.py logic
+# --- Configuration (Must match your file names and columns) ---
+ENGLISH_FILE = 'english_prompt_final.parquet' # <--- CHANGED
+MALAY_FILE = 'malay_prompt_final.parquet'     # <--- CHANGED
+
+# These column names are based on your rag_service.py logic (No Change)
 ENGLISH_QUERY_COL = 'input_fromuser'
 MALAY_QUERY_COL = 'Input_penerima'
 # -----------------------------------------------------------

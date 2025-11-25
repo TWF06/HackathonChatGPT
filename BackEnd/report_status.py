@@ -4,8 +4,9 @@ import time
 
 # --- Configuration ---
 API_URL = "http://127.0.0.1:8000/api/report_pps_status"
-PPS_NAME = "Kolej Komuniti"
-STATUS = "FULL" # Critical status to trigger the override
+# CHANGE THIS NAME to the closest PPS:
+PPS_NAME = "Dewan Orang Ramai Kg Dato Ahmad Razali (Dengkil)" 
+STATUS = "FULL"
 # ---------------------
 
 report_data = {

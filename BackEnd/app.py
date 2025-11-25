@@ -1,164 +1,177 @@
-from fastapi import FastAPI, File, UploadFile, Form, HTTPException
+from fastapi import FastAPI, File, UploadFile, Form, HTTPException, BackgroundTasks
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
-import shutil
 from pathlib import Path
 import json
 import time 
 from typing import List, Dict, Any
+import aiofiles 
+import os 
+import shutil # Needed for safe file handling
 
 # --- Conceptual Imports from your RAG and Action Services ---
-# NOTE: These functions are assumed to be available from the files you created.
+# NOTE: Ensure you have 'refresh_live_reports_from_disk' imported from action_runner
 from rag_service import search_documents, get_simulated_llm_response, load_documents_from_processed
-from action_runner import run_actions
-from simple_logger import log_query # Assuming this exists
-from ingest_pdf import ingest_pdf_path # Assuming this exists
+from action_runner import run_actions, refresh_live_reports_from_disk
+from simple_logger import log_query 
+from ingest_pdf import ingest_pdf_path 
 # -----------------------------------------------------------
 
 # =========================================================
-# 1. PROMPT TEMPLATES (Rumour Killer - Feature C)
+# 1. APPLICATION SETUP
 # =========================================================
-
-PROMPT_TEMPLATES = {
-    "en": {
-        "system": "You are a Smart Flood Mitigation Assistant. Answer the user's question ONLY based on the CONTEXT provided. DO NOT fabricate information. Always cite the Source. Maintain a helpful and professional tone.",
-        "template": "CONTEXT: {context}\n\nUSER QUESTION: {query}\n\nANSWER:"
-    },
-    "ms": {
-        "system": "Anda adalah Pembantu Mitigasi Banjir Pintar. Jawab soalan pengguna HANYA berdasarkan KONTEKS yang diberikan. JANGAN mereka-reka jawapan. Sentiasa nyatakan Sumber. Kekalkan nada yang membantu dan profesional.",
-        "template": "KONTEKS: {context}\n\nPERTANYAAN PENGGUNA: {query}\n\nJAWAPAN:"
-    }
-}
-
 
 app = FastAPI()
 
-# Add CORS middleware
+# Configuration for CORS 
 app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"], # Allow all origins for simplicity in this development environment
+    CORSMiddleware, 
+    allow_origins=["*"], 
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-
-class QueryRequest(BaseModel):
-    query: str
-    language: str = "en"
-
-class PPSStatusReport(BaseModel):
-    """Data model for crowdsourced PPS status reports (Helper Mode - Feature E)."""
-    pps_name: str
-    status: str # e.g., "FULL", "NO_FOOD", "NEED_BLANKETS"
-    reporter_id: str = "anonymous" # Simple ID/token
-
-# --- Helper Mode Setup ---
-REPORTS_FILE = Path("pps_live_status.json")
-# Ensure the file exists
-if not REPORTS_FILE.exists():
-    with REPORTS_FILE.open("w") as f:
-        json.dump([], f)
-# -------------------------
-
-
-@app.post("/api/query")
-def query_api(request: QueryRequest):
-    # 1. Retrieve from documents (Rumour Killer)
-    result = search_documents(request.query, request.language)
-    
-    result['language'] = request.language 
-    
-    # 2. Generate the simulated LLM answer
-    answer = get_simulated_llm_response(result, PROMPT_TEMPLATES)
-    
-    # 3. Generate action steps (Intelligent Routing/Smart PPS - Feature A)
-    retrieved_context = result.get("retrieved_context", "")
-    actions = run_actions(request.query, retrieved_context)
-
-    # 4. Log activity
-    sources_to_log = [result["source"]] if result.get("source") != "N/A" else []
-    log_query(request.query, answer, sources_to_log)
-
-    return {
-        "answer": answer,
-        "sources": sources_to_log,
-        "actions": actions
-    }
-
+# Configuration Files
+REPORTS_FILE = Path("pps_live_status.json") 
 UPLOAD_DIR = Path("uploads")
 UPLOAD_DIR.mkdir(exist_ok=True)
 
-@app.post("/api/upload")
-async def upload_pdf(file: UploadFile = File(None), file_path: str = Form(None)):
+
+# Pydantic Models for API validation
+class QueryBody(BaseModel):
+    query: str
+    language: str = "en"
+    lat: float = 2.9234
+    lon: float = 101.6669
+
+class PPSStatusReport(BaseModel):
+    pps_name: str
+    status: str
+    reporter_id: str
+
+
+# =========================================================
+# 2. CORE ENDPOINTS
+# =========================================================
+
+@app.post("/api/query")
+def process_query(body: QueryBody):
     """
-    Handles file upload and local path ingestion. (Rumour Killer Knowledge Base update)
+    Main endpoint for user queries. Runs RAG and Action Runner logic.
     """
-
-    # 1) Handle local path ingestion
-    if file_path:
-        if not Path(file_path).exists():
-            raise HTTPException(status_code=400, detail=f"Local file not found: {file_path}")
-        
-        chunks = ingest_pdf_path(file_path)
-        
-        # CRITICAL FIX: Simply call the function that updates the RAG state.
-        # Removed global/import lines that caused the SyntaxError.
-        load_documents_from_processed() 
-        
-        return {"status": "ok", "method": "local_path", "processed_chunks": [c["id"] for c in chunks], "message": f"Successfully ingested file from local path: {file_path}. {len(chunks)} chunks processed."}
-
-
-    # 2) Handle file upload
-    if file is None:
-        raise HTTPException(status_code=400, detail="No file or file_path provided.")
-
-    # Save uploaded file
-    destination = UPLOAD_DIR / file.filename
-    try:
-        with destination.open("wb") as buffer:
-            shutil.copyfileobj(file.file, buffer)
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Failed to save file: {str(e)}")
-    finally:
-        await file.close() # Close the UploadFile handle after reading
-
-    # Call the ingestion logic
-    chunks = ingest_pdf_path(str(destination), source=str(destination))
+    # 1. Refresh reports immediately before running actions (to ensure freshness)
+    refresh_live_reports_from_disk()
     
-    # CRITICAL FIX: Simply call the function that updates the RAG state.
-    # Removed global/import lines that caused the SyntaxError.
+    # 2. RAG Component
+    # We pass the language to the RAG service as well
+    search_result = search_documents(body.query, body.language)
+    
+    # 3. LLM Component (Simulated or Real)
+    llm_answer = get_simulated_llm_response(search_result, prompt_templates={}) 
+    
+    # 4. Action Runner Component (For PPS Recommendation)
+    # 🌟 CRITICAL FIX: Pass body.language to run_actions
+    actions = run_actions(body.query, body.lat, body.lon, body.language)
+    
+    # 5. Logging
+    log_query(body.query, llm_answer, [search_result.get('source', 'N/A')])
+    
+    # 6. Response
+    return {
+        "query": body.query,
+        "answer": llm_answer,
+        "sources": [search_result.get('source', 'N/A')],
+        "actions": actions
+    }
+
+
+# =========================================================
+# 3. DATA INGESTION & REPORTING ENDPOINTS (UPGRADED TO ASYNC)
+# =========================================================
+
+def run_pdf_ingestion_task(file_path: str):
+    """Function to be run as a background task."""
+    print(f"\n--- [BACKGROUND TASK] Starting ingestion for: {file_path} ---")
+    
+    # 1. Process the PDF and get chunks 
+    ingest_pdf_path(file_path, source=file_path)
+    
+    # 2. Reload RAG documents after ingestion. 
     load_documents_from_processed()
     
-    return {"status": "ok", "method": "upload", "processed_chunks": [c["id"] for c in chunks], "message": f"File '{file.filename}' uploaded and ingested successfully. {len(chunks)} chunks processed."}
+    print(f"--- [BACKGROUND TASK] Ingestion finished for: {file_path}. RAG documents reloaded. ---")
+
+
+@app.post("/api/upload_pdf")
+async def upload_pdf(background_tasks: BackgroundTasks, file: UploadFile = File(...)):
+    """
+    Handles PDF upload asynchronously and queues ingestion as a background task.
+    """
+    if not file.filename.lower().endswith(".pdf"):
+        raise HTTPException(status_code=400, detail="Only PDF files are allowed.")
+
+    # 1. Save the file asynchronously (using aiofiles)
+    destination = UPLOAD_DIR / file.filename
+    try:
+        async with aiofiles.open(destination, 'wb') as out_file:
+            # Read in chunks for safety, using the read() method of UploadFile
+            while content := await file.read(): 
+                await out_file.write(content)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Could not save file: {e}")
+
+    # 2. Queue the ingestion task
+    background_tasks.add_task(run_pdf_ingestion_task, str(destination))
+    
+    return {
+        "status": "processing", 
+        "message": f"File '{file.filename}' uploaded successfully. Ingestion started in the background."
+    }
 
 
 @app.post("/api/report_pps_status")
-def report_pps_status(report: PPSStatusReport):
+async def report_pps_status(report: PPSStatusReport):
     """
     Accepts crowdsourced reports on PPS status (Helper Mode - Feature E).
-    Saves the report to a JSON file.
+    Saves the report to a JSON file and INSTANTLY updates the in-memory state.
     """
     
     # 1. Prepare the report data
     report_data = report.model_dump()
-    report_data["timestamp"] = int(time.time()) # Add server timestamp
+    report_data["timestamp"] = int(time.time())
     
-    # 2. Read existing reports
-    try:
-        with REPORTS_FILE.open("r") as f:
-            existing_reports = json.load(f)
-    except (json.JSONDecodeError, FileNotFoundError):
-        existing_reports = []
+    # 2. Read existing reports asynchronously
+    existing_reports = []
+    if os.path.exists(REPORTS_FILE):
+        try:
+            # Read with UTF-8 encoding for safety
+            async with aiofiles.open(REPORTS_FILE, "r", encoding="utf-8") as f:
+                content = await f.read()
+            existing_reports = json.loads(content)
+        except (json.JSONDecodeError, FileNotFoundError, UnicodeDecodeError):
+            existing_reports = []
     
     # 3. Append the new report
     existing_reports.append(report_data)
     
-    # 4. Save the updated list back to the file
+    # 4. Save the updated list back to the file asynchronously
     try:
-        with REPORTS_FILE.open("w") as f:
-            json.dump(existing_reports, f, indent=4)
+        # Write with UTF-8 encoding for safety
+        async with aiofiles.open(REPORTS_FILE, "w", encoding="utf-8") as f:
+            await f.write(json.dumps(existing_reports, indent=4))
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Failed to save report: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Could not save report file: {e}")
+        
+    # 5. Trigger the in-memory update immediately!
+    refresh_live_reports_from_disk()
 
-    return {"status": "ok", "message": f"Status for {report.pps_name} reported successfully."}
+    return {"status": "ok", "message": "PPS status reported and live recommendations updated instantly."}
+
+
+# =========================================================
+# 4. STARTUP HOOK
+# =========================================================
+
+# Ensure RAG documents are loaded on startup.
+load_documents_from_processed()
