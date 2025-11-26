@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "shelter_name": "Dewan Komuniti Ampang Jaya",
+    "location": "Ampang, Selangor",
+    "latitude": 3.1501,
+    "longitude": 101.7669,
+    "benefits": ["Urban location", "Accessible"],
+    "drawbacks": ["Limited parking"],
+    "friendly_tags": ["family_friendly", "accessible"]
+  },
+  {
+    "id": 2,
+    "shelter_name": "Dewan Serbaguna Pandan Indah",
+    "location": "Pandan Indah, Selangor",
+    "latitude": 3.1300,
+    "longitude": 101.7643,
+    "benefits": ["Close to residential areas", "Clean facilities"],
+    "drawbacks": ["Small capacity"],
+    "friendly_tags": ["family_friendly"]
+  },
+  {
+    "id": 3,
+    "shelter_name": "Dewan MDHS Hulu Selangor",
+    "location": "Hulu Selangor, Selangor",
+    "latitude": 3.5768,
+    "longitude": 101.6435,
+    "benefits": ["Large municipal hall", "Ample space"],
+    "drawbacks": ["Far from Klang Valley"],
+    "friendly_tags": ["family_friendly"]
+  },
+  {
+    "id": 4,
+    "shelter_name": "Dewan Serbaguna Kuala Selangor",
+    "location": "Kuala Selangor, Selangor",
+    "latitude": 3.3442,
+    "longitude": 101.2558,
+    "benefits": ["Wide hall", "Good airflow"],
+    "drawbacks": ["Rural area"],
+    "friendly_tags": ["family_friendly"]
+  },
+  {
+    "id": 5,
+    "shelter_name": "Dewan MDKL Banting",
+    "location": "Banting, Selangor",
+    "latitude": 2.8131,
+    "longitude": 101.5020,
+    "benefits": ["Accessible", "Basic amenities"],
+    "drawbacks": ["Older toilets"],
+    "friendly_tags": ["family_friendly"]
+  }
+]

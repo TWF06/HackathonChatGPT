@@ -1,0 +1,428 @@
+[
+  {
+    "id": 41,
+    "shelter_name": "Dewan Sultan Sulaiman",
+    "location": "Kampung Baru, Kuala Lumpur",
+    "latitude": 3.155,
+    "longitude": 101.707,
+    "benefits": [
+      "Urban hall",
+      "Accessible by public transport"
+    ],
+    "drawbacks": [
+      "May be congested"
+    ],
+    "friendly_tags": [
+      "family_friendly"
+    ]
+  },
+  {
+    "id": 42,
+    "shelter_name": "SJKT Saraswathy",
+    "location": "Taman Desa / Jalan Klang Lama, Kuala Lumpur",
+    "latitude": 3.09,
+    "longitude": 101.664,
+    "benefits": [
+      "School classrooms",
+      "Sanitary facilities"
+    ],
+    "drawbacks": [
+      "Not purpose-built as shelter"
+    ],
+    "friendly_tags": [
+      "family_friendly"
+    ]
+  },
+  {
+    "id": 43,
+    "shelter_name": "Dewan Komuniti Bandar Menjalara",
+    "location": "Bandar Menjalara, Kepong, Kuala Lumpur",
+    "latitude": 3.225,
+    "longitude": 101.631,
+    "benefits": [
+      "Community hall",
+      "Near residential area"
+    ],
+    "drawbacks": [
+      "Small hall"
+    ],
+    "friendly_tags": [
+      "family_friendly"
+    ]
+  },
+  {
+    "id": 44,
+    "shelter_name": "Balai Raya Taman Bukit Maluri",
+    "location": "Bukit Maluri / Kepong, Kuala Lumpur",
+    "latitude": 3.23,
+    "longitude": 101.637,
+    "benefits": [
+      "Local hall",
+      "Easy access for neighbourhood"
+    ],
+    "drawbacks": [
+      "Limited capacity"
+    ],
+    "friendly_tags": [
+      "family_friendly"
+    ]
+  },
+  {
+    "id": 45,
+    "shelter_name": "Dewan Komuniti Sri Damansara",
+    "location": "Sri Damansara, Kuala Lumpur",
+    "latitude": 3.27,
+    "longitude": 101.611,
+    "benefits": [
+      "Community hall",
+      "Near main roads"
+    ],
+    "drawbacks": [
+      "Possibly crowded"
+    ],
+    "friendly_tags": [
+      "family_friendly"
+    ]
+  },
+  {
+    "id": 46,
+    "shelter_name": "Balai Raya Taman Aman, Sentul",
+    "location": "Sentul, Kuala Lumpur",
+    "latitude": 3.19,
+    "longitude": 101.69,
+    "benefits": [
+      "Local hall for residents",
+      "Central within KL"
+    ],
+    "drawbacks": [
+      "Small hall, limited facilities"
+    ],
+    "friendly_tags": [
+      "family_friendly"
+    ]
+  },
+  {
+    "id": 47,
+    "shelter_name": "Dewan Orang Ramai Taman Sri Sentul",
+    "location": "Sentul, Kuala Lumpur",
+    "latitude": 3.185,
+    "longitude": 101.695,
+    "benefits": [
+      "Community hall",
+      "Accessible for residents"
+    ],
+    "drawbacks": [
+      "May lack medical support"
+    ],
+    "friendly_tags": [
+      "family_friendly"
+    ]
+  },
+  {
+    "id": 48,
+    "shelter_name": "Dewan Komuniti Taman Melati",
+    "location": "Melati / Batu, Kuala Lumpur",
+    "latitude": 3.25,
+    "longitude": 101.73,
+    "benefits": [
+      "Hall for community use",
+      "Close to residential zones"
+    ],
+    "drawbacks": [
+      "Small capacity, limited amenities"
+    ],
+    "friendly_tags": [
+      "family_friendly"
+    ]
+  },
+  {
+    "id": 49,
+    "shelter_name": "Balai Raya Taman Setapak",
+    "location": "Setapak, Kuala Lumpur",
+    "latitude": 3.21,
+    "longitude": 101.74,
+    "benefits": [
+      "Accessible hall",
+      "Near main roads / transit"
+    ],
+    "drawbacks": [
+      "Limited space and facilities"
+    ],
+    "friendly_tags": [
+      "family_friendly"
+    ]
+  },
+  {
+    "id": 50,
+    "shelter_name": "Dewan Komuniti Wangsa Maju",
+    "location": "Wangsa Maju, Kuala Lumpur",
+    "latitude": 3.2,
+    "longitude": 101.75,
+    "benefits": [
+      "Urban community hall",
+      "Convenient for local residents"
+    ],
+    "drawbacks": [
+      "May be busy / crowded"
+    ],
+    "friendly_tags": [
+      "family_friendly",
+      "accessible"
+    ]
+  },
+  {
+    "id": 51,
+    "shelter_name": "Dewan Orang Ramai Taman Keramat",
+    "location": "Taman Keramat, Kuala Lumpur",
+    "latitude": 3.19,
+    "longitude": 101.75,
+    "benefits": [
+      "Community hall",
+      "Close to residential areas"
+    ],
+    "drawbacks": [
+      "Limited amenities"
+    ],
+    "friendly_tags": [
+      "family_friendly"
+    ]
+  },
+  {
+    "id": 52,
+    "shelter_name": "Balai Raya Taman Tun Dr Ismail (TTDI)",
+    "location": "TTDI, Kuala Lumpur",
+    "latitude": 3.145,
+    "longitude": 101.61,
+    "benefits": [
+      "Community hall",
+      "Near urban facilities"
+    ],
+    "drawbacks": [
+      "Parking may be limited"
+    ],
+    "friendly_tags": [
+      "family_friendly"
+    ]
+  },
+  {
+    "id": 53,
+    "shelter_name": "Dewan Komuniti Pantai Dalam",
+    "location": "Pantai Dalam, Kuala Lumpur",
+    "latitude": 3.11,
+    "longitude": 101.67,
+    "benefits": [
+      "Accessible hall",
+      "Near public transit"
+    ],
+    "drawbacks": [
+      "Small hall, limited capacity"
+    ],
+    "friendly_tags": [
+      "family_friendly"
+    ]
+  },
+  {
+    "id": 54,
+    "shelter_name": "Balai Raya Taman Desa",
+    "location": "Taman Desa, Kuala Lumpur",
+    "latitude": 3.07,
+    "longitude": 101.665,
+    "benefits": [
+      "Local hall",
+      "Community-based"
+    ],
+    "drawbacks": [
+      "May be old facilities"
+    ],
+    "friendly_tags": [
+      "family_friendly"
+    ]
+  },
+  {
+    "id": 55,
+    "shelter_name": "Dewan Orang Ramai Seri Kembangan",
+    "location": "Seri Kembangan, Selangor",
+    "latitude": 3.02,
+    "longitude": 101.7,
+    "benefits": [
+      "Community hall",
+      "Accessible to Klang Valley residents"
+    ],
+    "drawbacks": [
+      "Not central KL"
+    ],
+    "friendly_tags": [
+      "family_friendly"
+    ]
+  },
+  {
+    "id": 56,
+    "shelter_name": "Balai Raya Puchong",
+    "location": "Puchong, Selangor",
+    "latitude": 2.983,
+    "longitude": 101.66,
+    "benefits": [
+      "Hall space",
+      "Near population centre"
+    ],
+    "drawbacks": [
+      "Facilities may be basic"
+    ],
+    "friendly_tags": [
+      "family_friendly"
+    ]
+  },
+  {
+    "id": 57,
+    "shelter_name": "Dewan Komuniti Subang Jaya (USJ)",
+    "location": "Subang Jaya, Selangor",
+    "latitude": 3.03,
+    "longitude": 101.58,
+    "benefits": [
+      "Community hall",
+      "Accessible from major highways"
+    ],
+    "drawbacks": [
+      "May be busy"
+    ],
+    "friendly_tags": [
+      "family_friendly"
+    ]
+  },
+  {
+    "id": 58,
+    "shelter_name": "Dewan Orang Ramai Sungai Buloh",
+    "location": "Sungai Buloh, Selangor",
+    "latitude": 3.224,
+    "longitude": 101.574,
+    "benefits": [
+      "Community hall",
+      "Near town centre"
+    ],
+    "drawbacks": [
+      "Facilities may be minimal"
+    ],
+    "friendly_tags": [
+      "family_friendly"
+    ]
+  },
+  {
+    "id": 59,
+    "shelter_name": "Balai Raya Kota Damansara",
+    "location": "Kota Damansara, Selangor",
+    "latitude": 3.18,
+    "longitude": 101.59,
+    "benefits": [
+      "Community hall",
+      "Easy road access"
+    ],
+    "drawbacks": [
+      "Limited parking / space"
+    ],
+    "friendly_tags": [
+      "family_friendly"
+    ]
+  },
+  {
+    "id": 60,
+    "shelter_name": "Dewan Komuniti Klang",
+    "location": "Klang, Selangor",
+    "latitude": 3.033,
+    "longitude": 101.45,
+    "benefits": [
+      "Large hall",
+      "Accessible to many evacuees"
+    ],
+    "drawbacks": [
+      "Far from central KL"
+    ],
+    "friendly_tags": [
+      "family_friendly"
+    ]
+  },
+  {
+    "id": 61,
+    "shelter_name": "Dewan Orang Ramai Shah Alam",
+    "location": "Shah Alam, Selangor",
+    "latitude": 3.09,
+    "longitude": 101.52,
+    "benefits": [
+      "Large community hall",
+      "Near main roads"
+    ],
+    "drawbacks": [
+      "Distance from KL city"
+    ],
+    "friendly_tags": [
+      "family_friendly"
+    ]
+  },
+  {
+    "id": 62,
+    "shelter_name": "Balai Raya Meru",
+    "location": "Meru, Klang, Selangor",
+    "latitude": 3.06,
+    "longitude": 101.47,
+    "benefits": [
+      "Hall space",
+      "Accessible in Klang Valley"
+    ],
+    "drawbacks": [
+      "Basic facilities"
+    ],
+    "friendly_tags": [
+      "family_friendly"
+    ]
+  },
+  {
+    "id": 63,
+    "shelter_name": "Dewan Komuniti Kajang",
+    "location": "Kajang, Selangor",
+    "latitude": 2.995,
+    "longitude": 101.789,
+    "benefits": [
+      "Community hall",
+      "Potential shelter hall"
+    ],
+    "drawbacks": [
+      "Distance from KL city"
+    ],
+    "friendly_tags": [
+      "family_friendly"
+    ]
+  },
+  {
+    "id": 64,
+    "shelter_name": "Balai Raya Semenyih",
+    "location": "Semenyih, Selangor",
+    "latitude": 2.9,
+    "longitude": 101.85,
+    "benefits": [
+      "Hall space",
+      "Accessible by road"
+    ],
+    "drawbacks": [
+      "Far from KL; limited amenities"
+    ],
+    "friendly_tags": [
+      "family_friendly"
+    ]
+  },
+  {
+    "id": 65,
+    "shelter_name": "Dewan Komuniti Rawang",
+    "location": "Rawang, Selangor",
+    "latitude": 3.37,
+    "longitude": 101.58,
+    "benefits": [
+      "Community hall for evacuees",
+      "Accessible"
+    ],
+    "drawbacks": [
+      "Facilities may be basic"
+    ],
+    "friendly_tags": [
+      "family_friendly"
+    ]
+  }
+]
