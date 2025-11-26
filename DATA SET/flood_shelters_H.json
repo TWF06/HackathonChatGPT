@@ -1,0 +1,392 @@
+[
+  {
+    "id": 1,
+    "shelter_name": "Dewan Serbaguna Taman Kota Jaya",
+    "location": "Kota Tinggi, Johor",
+    "latitude": 1.73796,
+    "longitude": 103.89118,
+    "benefits": ["Large hall (~800 capacity)", "Sanitary facilities"],
+    "drawbacks": ["May be used for events (availability varies)"],
+    "friendly_tags": ["family_friendly", "accessible"]
+  },
+  {
+    "id": 2,
+    "shelter_name": "Dewan Jubli Intan Sultan Ibrahim",
+    "location": "Kota Tinggi, Johor",
+    "latitude": 1.73662,
+    "longitude": 103.90126,
+    "benefits": ["Large community hall", "Central location in Kota Tinggi"],
+    "drawbacks": ["Can be crowded during major events"],
+    "friendly_tags": ["family_friendly"]
+  },
+  {
+    "id": 3,
+    "shelter_name": "Kolej Vokasional Kota Tinggi (used as PPS)",
+    "location": "Kota Tinggi, Johor",
+    "latitude": 1.74717,
+    "longitude": 103.90740,
+    "benefits": ["School facilities (classrooms)", "Cooking/electric supply available"],
+    "drawbacks": ["Not primarily a shelter (school schedule may affect usage)"],
+    "friendly_tags": ["family_friendly", "accessible"]
+  },
+  {
+    "id": 4,
+    "shelter_name": "Dewan Serbaguna Bandar Penawar",
+    "location": "Pengerang, Kota Tinggi, Johor",
+    "latitude": 1.3667,
+    "longitude": 104.1167,
+    "benefits": ["Community hall", "Indoor space"],
+    "drawbacks": ["Limited parking"],
+    "friendly_tags": ["family_friendly"]
+  },
+  {
+    "id": 5,
+    "shelter_name": "Dewan Tun Ahmad",
+    "location": "Kuantan, Pahang",
+    "latitude": 3.8077,
+    "longitude": 103.3260,
+    "benefits": ["Large indoor hall", "Near main town facilities"],
+    "drawbacks": ["Can be crowded during large floods"],
+    "friendly_tags": ["family_friendly", "accessible"]
+  },
+  {
+    "id": 6,
+    "shelter_name": "Sekolah Kebangsaan Jalan Resak (used as PPS)",
+    "location": "Kuantan, Pahang",
+    "latitude": 3.8065,
+    "longitude": 103.3321,
+    "benefits": ["Classrooms for temporary shelter", "Toilets and water supply"],
+    "drawbacks": ["School premises (availability when in-session)"],
+    "friendly_tags": ["family_friendly"]
+  },
+  {
+    "id": 7,
+    "shelter_name": "Dewan Orang Ramai Taman Sri Muda",
+    "location": "Shah Alam, Selangor",
+    "latitude": 3.0851,
+    "longitude": 101.5328,
+    "benefits": ["Community hall used as PPS during Selangor floods", "Close to affected residential areas"],
+    "drawbacks": ["Subject to availability"],
+    "friendly_tags": ["family_friendly"]
+  },
+  {
+    "id": 8,
+    "shelter_name": "Dewan Serbaguna Taman Kenangan",
+    "location": "Kuala Terengganu, Terengganu",
+    "latitude": 5.3302,
+    "longitude": 103.1408,
+    "benefits": ["Indoor hall", "Used in past as PPS"],
+    "drawbacks": ["Limited capacity"],
+    "friendly_tags": ["family_friendly"]
+  },
+  {
+    "id": 9,
+    "shelter_name": "Dewan Serbaguna Kampung Baru Pasir Mas",
+    "location": "Pasir Mas, Kelantan",
+    "latitude": 6.04268,
+    "longitude": 102.13911,
+    "benefits": ["Community hall", "Near local amenities"],
+    "drawbacks": ["May have limited toilet facilities"],
+    "friendly_tags": ["family_friendly"]
+  },
+  {
+    "id": 10,
+    "shelter_name": "Dewan Serbaguna Taman Kota Laksamana",
+    "location": "Malacca City, Melaka",
+    "latitude": 2.1960,
+    "longitude": 102.2405,
+    "benefits": ["Large hall", "Close to town services"],
+    "drawbacks": ["May be used for events"],
+    "friendly_tags": ["family_friendly", "accessible"]
+  },
+  {
+    "id": 11,
+    "shelter_name": "Dewan Serbaguna Kampung Baru (PPS)",
+    "location": "Kuala Lumpur (Lembah Klang vicinity)",
+    "latitude": 3.1630,
+    "longitude": 101.7061,
+    "benefits": ["Central urban hall", "Accessible by major roads"],
+    "drawbacks": ["Can be congested"],
+    "friendly_tags": ["family_friendly"]
+  },
+  {
+    "id": 12,
+    "shelter_name": "Dewan Kelab Sultan Sulaiman",
+    "location": "Kuala Lumpur",
+    "latitude": 3.1616,
+    "longitude": 101.7002,
+    "benefits": ["Indoor hall", "Used previously as PPS"],
+    "drawbacks": ["Limited parking"],
+    "friendly_tags": ["family_friendly"]
+  },
+  {
+    "id": 13,
+    "shelter_name": "Dewan Orang Ramai Bukit Selambau",
+    "location": "Baling, Kedah",
+    "latitude": 5.6819,
+    "longitude": 100.6265,
+    "benefits": ["Community hall", "Near main road"],
+    "drawbacks": ["Limited medical support"],
+    "friendly_tags": ["family_friendly"]
+  },
+  {
+    "id": 14,
+    "shelter_name": "Dewan Masyarakat Sungai Petani",
+    "location": "Sungai Petani, Kedah",
+    "latitude": 5.6490,
+    "longitude": 100.4951,
+    "benefits": ["Large hall", "Sanitary facilities"],
+    "drawbacks": ["May exceed capacity in major floods"],
+    "friendly_tags": ["family_friendly", "kid_friendly"]
+  },
+  {
+    "id": 15,
+    "shelter_name": "Dewan Orang Ramai Bagan Serai",
+    "location": "Bagan Serai, Perak",
+    "latitude": 5.0060,
+    "longitude": 100.5247,
+    "benefits": ["Community space", "Near shops"],
+    "drawbacks": ["Limited parking"],
+    "friendly_tags": ["family_friendly"]
+  },
+  {
+    "id": 16,
+    "shelter_name": "Dewan Masyarakat Taiping",
+    "location": "Taiping, Perak",
+    "latitude": 4.8500,
+    "longitude": 100.7333,
+    "benefits": ["Large hall", "Used previously as PPS"],
+    "drawbacks": ["Low lighting in some areas"],
+    "friendly_tags": ["family_friendly", "kid_friendly"]
+  },
+  {
+    "id": 17,
+    "shelter_name": "Balai Raya Kampung Permatang",
+    "location": "Seberang Perai, Penang",
+    "latitude": 5.3877,
+    "longitude": 100.4260,
+    "benefits": ["Local community hall", "Easy access for residents"],
+    "drawbacks": ["Small hall"],
+    "friendly_tags": ["family_friendly"]
+  },
+  {
+    "id": 18,
+    "shelter_name": "Dewan Komuniti Taman Ria",
+    "location": "Butterworth, Penang",
+    "latitude": 5.3991,
+    "longitude": 100.3638,
+    "benefits": ["Indoor hall", "Near main roads"],
+    "drawbacks": ["Limited toilets"],
+    "friendly_tags": ["family_friendly"]
+  },
+  {
+    "id": 19,
+    "shelter_name": "Dewan Serbaguna Taman Seri",
+    "location": "Kepong, Kuala Lumpur (northern KL)",
+    "latitude": 3.1923,
+    "longitude": 101.6497,
+    "benefits": ["Community hall", "Accessible by public transit"],
+    "drawbacks": ["May be crowded"],
+    "friendly_tags": ["family_friendly", "OKU_friendly"]
+  }
+  {
+    "id": 21,
+    "shelter_name": "Dewan Serbaguna Tanah Merah",
+    "location": "Tanah Merah, Kelantan",
+    "latitude": 5.8000,
+    "longitude": 102.1500,
+    "benefits": ["Community hall", "Used previously as PPS"],
+    "drawbacks": ["Limited capacity"],
+    "friendly_tags": ["family_friendly"]
+  },
+  {
+    "id": 22,
+    "shelter_name": "Dewan Komuniti Jerantut",
+    "location": "Jerantut, Pahang",
+    "latitude": 3.9360,
+    "longitude": 102.3626,
+    "benefits": ["Local hall", "Good road access"],
+    "drawbacks": ["Few toilets"],
+    "friendly_tags": ["family_friendly"]
+  },
+  {
+    "id": 23,
+    "shelter_name": "Dewan Serbaguna Bandaraya Kota Kinabalu",
+    "location": "Kota Kinabalu, Sabah",
+    "latitude": 5.9817,
+    "longitude": 116.0755,
+    "benefits": ["Large urban hall", "Close to medical facilities"],
+    "drawbacks": ["Can be busy during peak events"],
+    "friendly_tags": ["family_friendly", "accessible"]
+  },
+  {
+    "id": 24,
+    "shelter_name": "Dewan Serbaguna Sandakan",
+    "location": "Sandakan, Sabah",
+    "latitude": 5.8402,
+    "longitude": 118.1179,
+    "benefits": ["Large hall", "Used as PPS in past"],
+    "drawbacks": ["Weak signal in some corners"],
+    "friendly_tags": ["family_friendly"]
+  },
+  {
+    "id": 25,
+    "shelter_name": "Dewan Suarah Sibu",
+    "location": "Sibu, Sarawak",
+    "latitude": 2.3000,
+    "longitude": 111.8167,
+    "benefits": ["Large community space", "Nearby medical desk"],
+    "drawbacks": ["Small parking area"],
+    "friendly_tags": ["family_friendly", "kid_friendly"]
+  },
+  {
+    "id": 26,
+    "shelter_name": "Dewan Masyarakat Kuching",
+    "location": "Kuching, Sarawak",
+    "latitude": 1.5531,
+    "longitude": 110.3450,
+    "benefits": ["Good airflow", "Sanitary facilities"],
+    "drawbacks": ["Small hall in some sections"],
+    "friendly_tags": ["family_friendly", "OKU_friendly"]
+  },
+  {
+    "id": 27,
+    "shelter_name": "Dewan Serbaguna Batu Pahat",
+    "location": "Batu Pahat, Johor",
+    "latitude": 1.8548,
+    "longitude": 102.9325,
+    "benefits": ["Large hall", "Kitchen facilities nearby"],
+    "drawbacks": ["Limited parking"],
+    "friendly_tags": ["family_friendly", "kid_friendly"]
+  },
+  {
+    "id": 28,
+    "shelter_name": "Dewan Komuniti Muar",
+    "location": "Muar, Johor",
+    "latitude": 2.0442,
+    "longitude": 102.5689,
+    "benefits": ["Community hall", "Close to shops"],
+    "drawbacks": ["Crowded in major events"],
+    "friendly_tags": ["family_friendly"]
+  },
+  {
+    "id": 29,
+    "shelter_name": "Dewan Serbaguna Johor Bahru",
+    "location": "Johor Bahru, Johor",
+    "latitude": 1.4655,
+    "longitude": 103.7576,
+    "benefits": ["Large urban hall", "Easy access to transport"],
+    "drawbacks": ["May be used for civic events"],
+    "friendly_tags": ["family_friendly", "accessible"]
+  },
+  {
+    "id": 30,
+    "shelter_name": "Dewan Rakyat Seremban / Dewan Serbaguna",
+    "location": "Seremban, Negeri Sembilan",
+    "latitude": 2.7297,
+    "longitude": 101.9381,
+    "benefits": ["Large hall", "Near town amenities"],
+    "drawbacks": ["Limited parking"],
+    "friendly_tags": ["family_friendly", "kid_friendly"]
+  },
+  {
+    "id": 31,
+    "shelter_name": "Dewan Orang Ramai Port Dickson",
+    "location": "Port Dickson, Negeri Sembilan",
+    "latitude": 2.5225,
+    "longitude": 101.7963,
+    "benefits": ["Coastal town hall", "Used in past as PPS"],
+    "drawbacks": ["Limited parking"],
+    "friendly_tags": ["family_friendly"]
+  },
+  {
+    "id": 32,
+    "shelter_name": "Dewan Serbaguna Banting",
+    "location": "Banting, Selangor",
+    "latitude": 2.8136,
+    "longitude": 101.5019,
+    "benefits": ["Community hall", "Close to residential areas"],
+    "drawbacks": ["Few toilets"],
+    "friendly_tags": ["family_friendly", "pet_friendly"]
+  },
+  {
+    "id": 33,
+    "shelter_name": "Dewan Serbaguna Puchong",
+    "location": "Puchong, Selangor",
+    "latitude": 3.0327,
+    "longitude": 101.6067,
+    "benefits": ["Large hall", "Sanitary facilities"],
+    "drawbacks": ["Hot at noon"],
+    "friendly_tags": ["family_friendly", "OKU_friendly"]
+  },
+  {
+    "id": 34,
+    "shelter_name": "Dewan Orang Ramai Rawang",
+    "location": "Rawang, Selangor",
+    "latitude": 3.3167,
+    "longitude": 101.5833,
+    "benefits": ["Community hall", "Nearby shops"],
+    "drawbacks": ["Low lighting"],
+    "friendly_tags": ["family_friendly"]
+  },
+  {
+    "id": 35,
+    "shelter_name": "Dewan Serbaguna Shah Alam (district hall)",
+    "location": "Shah Alam, Selangor",
+    "latitude": 3.0733,
+    "longitude": 101.5185,
+    "benefits": ["Large municipal hall", "Good access to services"],
+    "drawbacks": ["Weak signal in some areas"],
+    "friendly_tags": ["family_friendly", "OKU_friendly"]
+  },
+  {
+    "id": 36,
+    "shelter_name": "Dewan Komuniti Cyberjaya",
+    "location": "Cyberjaya, Selangor",
+    "latitude": 2.9251,
+    "longitude": 101.6574,
+    "benefits": ["Large hall", "Near medical services"],
+    "drawbacks": ["Limited parking"],
+    "friendly_tags": ["family_friendly", "pet_friendly"]
+  },
+  {
+    "id": 37,
+    "shelter_name": "Balai Raya Taman Merdeka",
+    "location": "Kuala Lumpur suburb",
+    "latitude": 3.2056,
+    "longitude": 101.7048,
+    "benefits": ["Local hall", "Accessible for neighbourhood"],
+    "drawbacks": ["Small capacity"],
+    "friendly_tags": ["family_friendly"]
+  },
+  {
+    "id": 38,
+    "shelter_name": "Dewan Serbaguna Tanah Merah Selatan",
+    "location": "Kuala Terengganu (southern suburbs), Terengganu",
+    "latitude": 5.3302,
+    "longitude": 103.1408,
+    "benefits": ["Indoor space", "Used as PPS previously"],
+    "drawbacks": ["Limited medical assistance on site"],
+    "friendly_tags": ["family_friendly"]
+  },
+  {
+    "id": 39,
+    "shelter_name": "Dewan Orang Ramai Kampung Baru (coastal)",
+    "location": "Kuala Lumpur / Klang River area",
+    "latitude": 3.1630,
+    "longitude": 101.7061,
+    "benefits": ["Easy for nearby residents", "Simple facilities"],
+    "drawbacks": ["Prone to crowding"],
+    "friendly_tags": ["family_friendly"]
+  },
+  {
+    "id": 40,
+    "shelter_name": "Dewan Serbaguna Labuan",
+    "location": "Labuan",
+    "latitude": 5.2833,
+    "longitude": 115.2333,
+    "benefits": ["Island hall", "Good airflow"],
+    "drawbacks": ["Limited parking"],
+    "friendly_tags": ["family_friendly","OKU_friendly"]
+  }
+]
