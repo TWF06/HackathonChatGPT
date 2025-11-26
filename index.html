@@ -65,7 +65,7 @@
 
     <div id="guest-info" class="p-3 bg-yellow-50 border-b border-yellow-400">
         <div class="max-w-4xl mx-auto text-sm text-yellow-800 font-medium text-center md:text-left">
-            ⚠️ **Guest Mode:** All data is saved locally in your browser.
+            ⚠️ Guest Mode: All data is saved locally in your browser.
         </div>
     </div>
     
@@ -83,7 +83,7 @@
             <h2 class="text-2xl font-bold text-gray-800 border-b pb-2">1. Situation & Needs Assessment</h2>
             
             <p class="text-base text-gray-600 font-semibold bg-blue-50 p-4 rounded-lg border-l-4 border-blue-500">
-                **Phase 1:** Confirm your location and clearly describe your family's needs for safe routing.
+                Phase 1: Confirm your location and clearly describe your family's needs for safe routing.
             </p>
             
             <div class="card p-5">
@@ -151,7 +151,7 @@
 
         <section id="qr-passport" class="tab-content hidden space-y-6">
             <h2 class="text-2xl font-bold text-gray-800 border-b pb-2">3. JKM Passport Creation</h2>
-            <p class="text-base text-gray-600">Complete the details below to generate your **Zero-Typing QR Passport** for rapid registration.</p>
+            <p class="text-base text-gray-600">Complete the details below to generate your Zero-Typing QR Passport for rapid registration.</p>
 
             <div id="save-status" class="p-3 text-sm rounded-lg font-medium hidden"></div>
 
@@ -303,43 +303,44 @@
             navigator.geolocation.getCurrentPosition(res, rej, opts);
         });
         
-        // The main, robust location detection function using Promise.race
+        // The main, sequential location detection function (MODIFIED)
         async function getUserLocation() {
             const display = document.getElementById('current-location-display');
             display.classList.add('pulse-animation');
             display.innerHTML = 'Detecting location...';
 
-            // 1. Define the GPS attempts (High and Low accuracy) to run in parallel
-            const highAccuracyPromise = getPos({ enableHighAccuracy: true, timeout: 5000, maximumAge: 0 }); // Aggressive timeout
-            const lowAccuracyPromise = getPos({ enableHighAccuracy: false, timeout: 8000, maximumAge: 0 }); // Slower fallback
-
+            // 1. Attempt GPS/Geolocation (Primary, High Accuracy)
             try {
-                // 2. Race the two GPS attempts (the first success wins)
-                const position = await Promise.race([highAccuracyPromise, lowAccuracyPromise]);
+                const position = await getPos({ 
+                    enableHighAccuracy: true, 
+                    timeout: 10000, // Increased timeout since we are not racing
+                    maximumAge: 0 
+                });
                 
-                // Save the successful position and update the UI
+                // Success: Save GPS position
                 savePosition(position);
                 updateLocationUI();
                 return; 
+
             } catch (e) {
                 console.log("GPS/Geolocation failed or timed out. Moving to IP detection.", e);
             }
 
-            // 3. Fallback to IP Location
+            // 2. Fallback to IP Location
             try {
                 const ipSuccess = await getIPLocation();
                 if (ipSuccess) {
+                    // Success: IP location found. Display and allow manual override.
                     updateLocationUI();
                     return;
                 }
             } catch (e) {
-                // Catch is here for completeness, but getIPLocation should handle most errors and return false
                 console.warn("Unexpected IP Location Error.", e);
             }
 
-            // 4. Final fallback (Source: null, triggers Manual Input form display)
+            // 3. Final fallback: Failed to detect.
             userLocation.source = null;
-            updateLocationUI();
+            updateLocationUI(); // This will trigger the display of the Manual Input form
         }
 
         document.getElementById('manual-location-form').addEventListener('submit', (e) => {
@@ -433,7 +434,7 @@
                         document.getElementById("best-match-display").innerHTML = `
                             <p class="text-2xl font-extrabold text-green-700">Best Match Found!</p>
                             <p class="text-4xl font-extrabold text-indigo-700 my-2">${data.selected_pps || 'Unknown PPS'}</p>
-                            <p class="text-lg text-gray-700">Proceed to the **QR Passport** tab.</p>
+                            <p class="text-lg text-gray-700">Proceed to the QR Passport tab.</p>
                         `;
                         document.getElementById("jamai-citation").classList.remove("hidden");
                         document.getElementById('status-content').innerHTML = `<p class="text-sm whitespace-pre-wrap text-gray-800">✅ Routing successful.</p>`;
