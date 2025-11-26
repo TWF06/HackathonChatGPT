@@ -14,11 +14,11 @@ In Peninsular Malaysia, floods happen almost every year. Having a Chat AI to ans
 ## DATA SET
 Due to time limit and avoiding copyright issues for scraping government data, we use a set of mock data for our AI to run.
 
-##JAMAIBASE
+## JAMAIBASE
 
-##BACKEND
+## BACKEND
 
-##FRONTEND
+## FRONTEND
 
 ## Authors
 
