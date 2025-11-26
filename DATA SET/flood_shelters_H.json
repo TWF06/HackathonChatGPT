@@ -188,7 +188,17 @@
     "benefits": ["Community hall", "Accessible by public transit"],
     "drawbacks": ["May be crowded"],
     "friendly_tags": ["family_friendly", "OKU_friendly"]
-  }
+  },
+  {
+    "id": 20,
+    "shelter_name": "Dewan Orang Ramai Kota Bharu",
+    "location": "Kota Bharu, Kelantan",
+    "latitude": 6.1399,
+    "longitude": 102.2422,
+    "benefits": ["Large municipal hall","Nearby services"],
+    "drawbacks": ["Can be used for official events"],
+    "friendly_tags": ["family_friendly","kid_friendly"]
+  },
   {
     "id": 21,
     "shelter_name": "Dewan Serbaguna Tanah Merah",
