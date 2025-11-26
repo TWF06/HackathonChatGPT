@@ -7,9 +7,18 @@ Members: \
 4.Tan Wei Feng\
 5.Lim Jie Shin
 
-In Peninsular Malaysia, floods happen almost every year. Having a chat ai to answer questions regarding floods will be definately helpful. 
+In Peninsular Malaysia, floods happen almost every year. Having a Chat AI to answer questions regarding floods will be definately helpful. 
 
 **SmartPPS: BANTU BANJIR** is here to help to encounter issues and questions regarding floods.
+
+## DATA SET
+Due to time limit and avoiding copyright issues for scraping government data, we use a set of mock data for our AI to run.
+
+#JAMAIBASE
+
+#BACKEND
+
+#FRONTEND
 
 ## Authors
 
