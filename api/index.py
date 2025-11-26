@@ -1,11 +1,13 @@
 from flask import Flask, request, jsonify
 from jamaibase import JamAI, types as p
+from flask_cors import CORS
 import os
 import sys
 import re
 from datetime import datetime
 
 app = Flask(__name__)
+CORS(app)
 
 # 1. Configuration
 PROJECT_ID = os.getenv("JAMAI_PROJECT_ID")
