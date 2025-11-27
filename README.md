@@ -56,12 +56,9 @@ Backend engineers consume Jama entries as JSON for UI rendering.
 All entries are bilingual (English & Bahasa Melayu) and follow strict formatting rules.
 
 ## BACKEND
-Based on the code in `api/index.py` and the configuration files, here is the **Backend** section for your `README.md`. You can copy and paste this directly into your existing README file.
+The backend is built using **Python** and **Flask**, designed to run as a serverless function (configured for Vercel). It acts as a middleware between the client-side application and the **JamAI Base** platform, handling data processing and LLM interaction states.
 
 -----
-
-## BACKEND
-The backend is built using **Python** and **Flask**, designed to run as a serverless function (configured for Vercel). It acts as a middleware between the client-side application and the **JamAI Base** platform, handling data processing and LLM interaction states.
 
 ### 🛠️ Tech Stack
 
