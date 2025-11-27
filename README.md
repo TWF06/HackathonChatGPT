@@ -17,8 +17,6 @@ This project is a Flood Safety Assistant designed to support vulnerable communit
 
 **Accessibility & Pet Support:** Flags PPS features like wheelchair access, OKU toilets, ramps, and pet policies.
 
-**Rumour Verification: Confirms or denies rumours** (e.g. PPS closure, electricity cut-off) using trusted sources.
-
 **Structured Output:** Every response includes:
 
 **Recommendation
@@ -34,14 +32,13 @@ This project is a Flood Safety Assistant designed to support vulnerable communit
 Due to time limit and avoiding copyright issues for scraping government data, we use a set of mock data for our AI to run.
 
 ## JAMAIBASE
-**Rumours detector
 
 **All structured responses are managed in JAMAI under tables like english_prompt and malay_prompt.**
 
 Table Columns:
 Column	Description
-Name	Scenario or query type (e.g. “pu blic transport”, “OKU access”)
-Recommendation	Safest PPS or action to take
+Name	Scenario or query type (e.g. “public transport”, “OKU access”)
+Recommendation	Safest PPS
 Accessibility & Pet	Accessibility features and pet policy (e.g. “Mesra kerusi roda, haiwan dibenarkan”)
 Rationale	3-point explanation of rejected PPS options
 Answer_Queries	Notes on how the assistant should respond to user queries
