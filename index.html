@@ -65,7 +65,7 @@
 
     <div id="guest-info" class="p-3 bg-yellow-50 border-b border-yellow-400">
         <div class="max-w-4xl mx-auto text-sm text-yellow-800 font-medium text-center md:text-left">
-            ⚠️ If it is flooded, forget it. Reach out to local authorities for rescue. This tool is for planning only.
+            ⚠️ Logic Update: Distance is now calculated mathematically before AI analysis.
         </div>
     </div>
     
@@ -379,8 +379,8 @@
             // 2. Load & Filter Shelter Data
             let nearbyShelters = [];
             try {
-                // Fetch the JSON file (Must be hosted locally or on server)
-                const res = await fetch('flood_shelters_H.json');
+                // --- FIX: UPDATED PATH FOR DATA SET FOLDER ---
+                const res = await fetch('DATA SET/flood_shelters_H.json');
                 const shelters = await res.json();
                 
                 // MATH: Calculate distance for every shelter
@@ -404,7 +404,7 @@
 
             } catch (err) {
                 console.error("Failed to load/process shelter JSON", err);
-                alert("Error loading shelter database. Ensure 'flood_shelters_H.json' is in the same folder.");
+                alert("Error loading shelter database. Ensure 'flood_shelters_H.json' is in the 'DATA SET' folder.");
                 button.disabled = false; button.textContent = 'Try Again';
                 return;
             }
